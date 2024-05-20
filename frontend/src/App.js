@@ -12,12 +12,12 @@ function App() {
     <Router>
       <div>
         <NavBar /> 
-        <Routes> {/* Use Routes em vez de Switch */}
+        <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} /> {/* Use element em vez de component */}
-          <Route path="/register" element={<RegisterPage />} /> {/* Use element */}
-          <Route path="/dashboard" element={<Dashboard />} /> {/* Use element */}
-          <Route path="/device-selection" element={<DeviceSelection />} /> {/* Use element */}
+          <Route path="/login" element={<LoginPage />} /> 
+          <Route path="/register" element={<RegisterPage />} /> 
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/device-selection" element={<DeviceSelection />} /> 
         </Routes>
         </div>
     </Router>

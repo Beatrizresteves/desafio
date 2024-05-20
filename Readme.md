@@ -37,7 +37,3 @@ Este é um projeto de desenvolvimento FullStack para criar uma aplicação de ca
 1. Navegue até a pasta `frontend`.
 2. Instale as dependências usando `npm install`.
 3. Inicie a aplicação usando `npm start`.
-
-## Autor
-
-Seu Nome

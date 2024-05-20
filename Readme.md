@@ -28,10 +28,6 @@ Para mais detalhes sobre os parâmetros esperados em cada endpoint e as resposta
 
 4. **Interagindo com a API**: Utilize as diferentes funcionalidades disponíveis no aplicativo para interagir com a API, como registrar novos dispositivos, visualizar detalhes de dispositivos existentes e autenticar usuários.
 
-## Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests para melhorar este projeto.
-
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](link_para_licenca).

@@ -32,7 +32,7 @@ const LoginPage = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <Link to="/register">Register here</Link></p>
+      <p>Nao tem uma conta? <Link to="/register">Cadastre-se</Link></p>
     </div>
   );
 };

@@ -17,7 +17,7 @@ function NavBar() {
           Início
         </Button>
         <Button color="inherit" component={Link} to="/register">
-          Cadastro
+          Login
         </Button>
         <Button color="inherit" component={Link} to="/dashboard">
           Dashboard

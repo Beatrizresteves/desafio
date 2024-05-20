@@ -23,7 +23,7 @@ const RegisterPage = () => {
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <h2>Login</h2>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input

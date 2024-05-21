@@ -14,7 +14,7 @@ const RegisterPage = () => {
     e.preventDefault();
   
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/login', { username, password });
+      const res = await axios.post('http://localhost:3000/api/auth/register', { username, password });
       console.log(res.data.token); // Exibe o token de autenticação
       // Redirecionar para o Dashboard ou outra página privada
     } catch (err) {

@@ -1,25 +1,23 @@
-// RegisterPage.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'; // Importe useNavigate em vez de useHistory
+import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Use useNavigate para navegação
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const res = await axios.post('http://localhost:3000/api/auth/register', { username, password });
-      console.log(res.data.token); // Exibe o token de autenticação
-      // Redirecionar para o Dashboard ou outra página privada
+      console.log(res.data.message); // Exibe mensagem de sucesso
+      navigate('/dashboard'); // Ajuste o caminho conforme necessário
     } catch (err) {
-      setError('Invalid credentials'); // Exibe mensagem de erro genérica para fins de segurança
-      console.error('Error logging in', err);
+      setError('Error registering user'); // Exibe mensagem de erro genérica para fins de segurança
+      console.error('Error registering user', err);
     }
   };
 

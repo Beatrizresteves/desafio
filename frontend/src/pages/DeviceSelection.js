@@ -27,7 +27,7 @@ const DeviceSelection = () => {
       <ul>
         {devices.map((device) => (
           <li key={device._id}>
-            {device.name} <button onClick={() => handleSelect(device)}>Select</button>
+            {device.identifier} <button onClick={() => handleSelect(device)}>Select</button>
           </li>
         ))}
       </ul>

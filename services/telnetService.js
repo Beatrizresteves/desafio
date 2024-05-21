@@ -1,27 +1,23 @@
-// backend/telnetService.js
-const net = require('net');
+const Telnet = require('telnet-client');
 
-const executeTelnetCommand = (host, port, command) => {
-  return new Promise((resolve, reject) => {
-    const client = new net.Socket();
-    let response = '';
+const getDeviceData = async (device, command) => {
+  let connection = new Telnet();
+  const params = {
+    host: device.url,
+    port: 23,
+    timeout: 1500,
+  };
 
-    client.connect(port, host, () => {
-      client.write(command + '\n');
-    });
-
-    client.on('data', (data) => {
-      response += data.toString();
-    });
-
-    client.on('end', () => {
-      resolve(response);
-    });
-
-    client.on('error', (err) => {
-      reject(err);
-    });
-  });
+  try {
+    await connection.connect(params);
+    const res = await connection.exec(command);
+    return res;
+  } catch (error) {
+    console.error('Error connecting to device', error);
+    return null;
+  } finally {
+    connection.end();
+  }
 };
 
-module.exports = { executeTelnetCommand };
+module.exports = { getDeviceData };

@@ -1,13 +1,15 @@
+// src/pages/DashboardPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const [deviceData, setDeviceData] = useState([]);
+  const selectedDevices = JSON.parse(localStorage.getItem('selectedDevices')) || {};
 
   useEffect(() => {
     const fetchDeviceData = async () => {
       try {
-        const res = await axios.get('/api/devices');
+        const res = await axios.post('/api/devices/data', { selectedDevices });
         setDeviceData(res.data);
       } catch (err) {
         console.error('Error fetching device data', err);
@@ -20,9 +22,9 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <ul>
-        {deviceData.map((device, index) => (
+        {deviceData.map((data, index) => (
           <li key={index}>
-            {device.identifier}
+            {data.device.name}: {data.response}
           </li>
         ))}
       </ul>
@@ -30,4 +32,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

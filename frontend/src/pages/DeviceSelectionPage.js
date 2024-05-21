@@ -11,7 +11,7 @@ const DeviceSelectionPage = () => {
   useEffect(() => {
     const fetchDevices = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/devices');
+        const response = await axios.get('/api/devices');
         setDevices(response.data);
       } catch (error) {
         console.error('Error fetching devices:', error);
@@ -35,8 +35,8 @@ const DeviceSelectionPage = () => {
     });
   };
 
-  const handleSubmit = () => {
-    // Save selected devices and their commands to localStorage or context
+  const handleSubmit = (e) => {
+    e.preventDefault();
     localStorage.setItem('selectedDevices', JSON.stringify(selectedDevices));
     navigate('/dashboard');
   };
@@ -46,18 +46,18 @@ const DeviceSelectionPage = () => {
       <h1>Select Devices and Commands</h1>
       <form onSubmit={handleSubmit}>
         {devices.map((device) => (
-          <div key={device.id}>
-            <h3>{device.description}</h3>
+          <div key={device._id}>
+            <h3>{device.name}</h3>
             {device.commands.map((command) => (
-              <div key={command.operation}>
+              <div key={command}>
                 <label>
                   <input
                     type="checkbox"
                     onChange={(e) =>
-                      handleDeviceChange(device.id, command.operation, e.target.checked)
+                      handleDeviceChange(device._id, command, e.target.checked)
                     }
                   />
-                  {command.operation}
+                  {command}
                 </label>
               </div>
             ))}

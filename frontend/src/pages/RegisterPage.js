@@ -12,14 +12,14 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const res = await axios.post('/api/auth/register', { username, password });
-      console.log(res.data.message); // Exibe mensagem de sucesso
-      navigate('/login'); // Use navigate para redirecionamento
+      const res = await axios.post('http://localhost:3000/api/auth/login', { username, password });
+      console.log(res.data.token); // Exibe o token de autenticação
+      // Redirecionar para o Dashboard ou outra página privada
     } catch (err) {
-      setError(err.response.data.message); // Exibe mensagem de erro
-      console.error('Error registering user', err);
+      setError('Invalid credentials'); // Exibe mensagem de erro genérica para fins de segurança
+      console.error('Error logging in', err);
     }
   };
 

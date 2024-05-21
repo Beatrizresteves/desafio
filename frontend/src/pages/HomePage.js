@@ -1,19 +1,37 @@
-// src/pages/HomePage.js
-import React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import React, { useState, useEffect } from 'react';
+import MapComponent from '../components/MapComponent';
+import axios from 'axios';
 
-function HomePage() {
+const HomePage = () => {
+  const [devices, setDevices] = useState([]);
+
+  useEffect(() => {
+    fetchDevices();
+  }, []);
+
+  const fetchDevices = async () => {
+    try {
+      const response = await axios.get('/api/devices');
+      setDevices(response.data);
+    } catch (error) {
+      console.error('Error fetching devices:', error);
+    }
+  };
+
   return (
-    <Container>
-      <Typography variant="h2" gutterBottom>
-        Seja bem vindo!
-      </Typography>
-      <Typography variant="body1">
-        Esta é a página inicial do aplicativo IoT Dashboard.
-      </Typography>
-    </Container>
+    <div>
+      <h1>Interactive Map with IoT Devices</h1>
+      <MapComponent devices={devices} />
+      <div>
+        <h2>Device List</h2>
+        <ul>
+          {devices.map(device => (
+            <li key={device.id}>{device.name}: {device.metrics}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
-}
+};
 
 export default HomePage;

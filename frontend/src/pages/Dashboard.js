@@ -4,9 +4,8 @@ import '../App.css';
 
 const Dashboard = () => {
   const [devices, setDevices] = useState([]);
-  const [selectedDevices, setSelectedDevices] = useState([]);
-  const [selectedCommands, setSelectedCommands] = useState([]);
-  const [deviceData, setDeviceData] = useState([]);
+  const [selectedDevice, setSelectedDevice] = useState(null); 
+  const [rainMeasurement, setRainMeasurement] = useState(null); // Estado para armazenar a medição de chuva
 
   useEffect(() => {
     fetchDevices();
@@ -21,37 +20,34 @@ const Dashboard = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleDeviceSelect = async (deviceId) => {
     try {
-      const responses = await Promise.all(selectedDevices.map(device => {
-        return axios.post(`http://localhost:3000/api/devices/${device._id}/commands`, { commands: selectedCommands });
-      }));
-      setDeviceData(responses.map(response => response.data));
+      const response = await axios.get(`http://localhost:3000/api/devices/${deviceId}`);
+      setSelectedDevice(response.data);
+      // Se os dados do dispositivo incluírem a medição de chuva, definimos o estado correspondente
+      if (response.data.rainMeasurement) {
+        setRainMeasurement(response.data.rainMeasurement);
+      } else {
+        setRainMeasurement(null);
+      }
     } catch (error) {
       console.error('Error fetching device data:', error);
     }
   };
 
   return (
-    <div className="dashboard-container">
-      <h1>Dashboard</h1>
+    <div className="dashboard-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh',  height: '800vh' }}>
       <div className="device-selection">
-        <h2>Selecione os dispositivos:</h2>
+        <h2>Selecione um dispositivo:</h2>
         <ul>
           {devices.map(device => (
             <li key={device._id}>
               <label>
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="device"
                   value={device._id}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedDevices([...selectedDevices, device]);
-                    } else {
-                      setSelectedDevices(selectedDevices.filter(selected => selected._id !== device._id));
-                    }
-                  }}
+                  onChange={(e) => handleDeviceSelect(e.target.value)} 
                 />
                 {device.identifier}
               </label>
@@ -59,32 +55,34 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      <form className="command-selection" onSubmit={handleSubmit}>
-        <h2>Selecione os comandos:</h2>
-        <ul>
-          {selectedDevices.map(device => (
-            <li key={device._id}>
-              <label>
-                {device.identifier}:
-                <input
-                  type="text"
-                  value={selectedCommands[device._id] || ''}
-                  onChange={(e) => setSelectedCommands({ ...selectedCommands, [device._id]: e.target.value })}
-                />
-              </label>
+      {selectedDevice && (
+        <div className="device-data">
+          <h2>Dados do Dispositivo:</h2>
+          <ul>
+            <li><strong>Identifier:</strong> {selectedDevice.identifier}</li>
+            <li><strong>Description:</strong> {selectedDevice.description}</li>
+            <li><strong>Manufacturer:</strong> {selectedDevice.manufacturer}</li>
+            <li><strong>URL:</strong> {selectedDevice.url}</li>
+            {/* Exibição da medição de chuva se disponível */}
+            {rainMeasurement && (
+              <li><strong>Rain Measurement:</strong> {rainMeasurement}</li>
+            )}
+            <li>
+              <strong>Commands:</strong>
+              <ul>
+                {selectedDevice.commands.map((command, index) => (
+                  <li key={index}>
+                    <strong>Command:</strong> {command.command.command}<br />
+                    <strong>Operation:</strong> {command.operation}<br />
+                    <strong>Description:</strong> {command.description}<br />
+                    <strong>Result:</strong> {command.result}<br />
+                  </li>
+                ))}
+              </ul>
             </li>
-          ))}
-        </ul>
-        <button type="submit">Consultar Dados</button>
-      </form>
-      <div className="device-data">
-        <h2>Dados dos Dispositivos:</h2>
-        <ul>
-          {deviceData.map((data, index) => (
-            <li key={index}>{JSON.stringify(data)}</li>
-          ))}
-        </ul>
-      </div>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

@@ -22,9 +22,6 @@ function NavBar() {
         <Button color="inherit" component={Link} to="/register">
           Cadastro
         </Button>
-        <Button color="inherit" component={Link} to="/dashboard">
-          Dashboard
-        </Button>
       </Toolbar>
     </AppBar>
   );

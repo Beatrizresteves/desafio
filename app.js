@@ -7,7 +7,7 @@ const deviceRoutes = require('./routes/devices');
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json()); // Adiciona bodyParser para parsear JSON
+app.use(bodyParser.json()); 
 
 mongoose.connect('mongodb://0.0.0.0:27017/iot-platform', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))

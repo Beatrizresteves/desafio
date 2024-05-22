@@ -5,8 +5,7 @@ import '../App.css';
 const Dashboard = () => {
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null); 
-  const [rainMeasurement, setRainMeasurement] = useState(null); // Estado para armazenar a medição de chuva
-
+  const [rainMeasurement, setRainMeasurement] = useState(null); 
   useEffect(() => {
     fetchDevices();
   }, []);
@@ -24,7 +23,6 @@ const Dashboard = () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/devices/${deviceId}`);
       setSelectedDevice(response.data);
-      // Se os dados do dispositivo incluírem a medição de chuva, definimos o estado correspondente
       if (response.data.rainMeasurement) {
         setRainMeasurement(response.data.rainMeasurement);
       } else {

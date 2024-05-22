@@ -59,4 +59,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router; // Certifique-se de exportar o router
+module.exports = router;

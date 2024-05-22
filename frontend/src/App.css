@@ -127,6 +127,12 @@ button[type="submit"]:hover {
   margin-left: 10px;
 }
 
+input {
+  margin-bottom: 10px; 
+  margin-right: 10px;
+
+}
+
 button {
   padding: 10px 20px;
   background-color: #007bff;

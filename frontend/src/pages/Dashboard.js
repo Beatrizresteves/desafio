@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../App.css'; // Importe o arquivo de estilos CSS
+import '../App.css'; 
 
 const Dashboard = () => {
   const [devices, setDevices] = useState([]);

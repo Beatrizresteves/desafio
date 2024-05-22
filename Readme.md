@@ -14,7 +14,6 @@ A API Community IoT Device (CIoTD) segue a especificação OpenAPI 3.0.0 e forne
 - **POST /api/auth/register**: Registra um novo usuário.
 - **POST /api/auth/login**: Autentica um usuário e fornece um token de acesso.
 
-Para mais detalhes sobre os parâmetros esperados em cada endpoint e as respostas correspondentes, consulte a [documentação completa da API](link_para_documentacao).
 
 ## Como Usar
 
@@ -27,10 +26,6 @@ Para mais detalhes sobre os parâmetros esperados em cada endpoint e as resposta
    - **Produção**: Para criar uma versão otimizada para produção, execute `npm run build`. Isso criará uma pasta `build` com os arquivos otimizados prontos para implantação.
 
 4. **Interagindo com a API**: Utilize as diferentes funcionalidades disponíveis no aplicativo para interagir com a API, como registrar novos dispositivos, visualizar detalhes de dispositivos existentes e autenticar usuários.
-
-## Código Fonte
-
-O código fonte deste projeto está disponível no [repositório do GitHub do candidato](link_para_repositorio).
 
 ## Explicação de Decisões de Design e Implementação
 

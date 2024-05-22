@@ -1,23 +1,29 @@
+// src/services/telnetService.js
 const Telnet = require('telnet-client');
 
-const getDeviceData = async (device, command) => {
+async function getDeviceData(url, command) {
   let connection = new Telnet();
+
   const params = {
-    host: device.url,
+    host: url,
     port: 23,
+    negotiationMandatory: false,
     timeout: 1500,
+    shellPrompt: '',
   };
 
   try {
     await connection.connect(params);
-    const res = await connection.exec(command);
-    return res;
+    let response = await connection.send(command);
+    return response;
   } catch (error) {
-    console.error('Error connecting to device', error);
-    return null;
+    console.error('Error connecting to device:', error);
+    throw new Error('Error connecting to device');
   } finally {
     connection.end();
   }
-};
+}
 
-module.exports = { getDeviceData };
+module.exports = {
+  getDeviceData,
+};

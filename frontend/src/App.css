@@ -89,7 +89,7 @@
 }
 
 button[type="submit"] {
-  width: 100%;
+  width: 30%;
   padding: 10px;
   background-color: #61dafb;
   border: none;
@@ -102,4 +102,40 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #21a1f1;
+}
+
+.dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.device-selection, .command-selection, .device-data {
+  margin-bottom: 20px;
+}
+
+.device-selection ul, .command-selection ul, .device-data ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.device-selection label, .command-selection label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.command-selection label input[type="text"] {
+  margin-left: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }

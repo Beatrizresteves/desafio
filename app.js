@@ -1,15 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser'); // Importe o bodyParser
-const authRoutes = require('./routes/auth');
+const bodyParser = require('body-parser');
 const cors = require('cors');
+const authRoutes = require('./routes/auth');
 const deviceRoutes = require('./routes/devices');
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json()); // Adicione o middleware bodyParser aqui
+app.use(bodyParser.json()); // Adiciona bodyParser para parsear JSON
 
-mongoose.connect('mongodb://0.0.0.0:27017/iot-platform', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://0.0.0.0:27017/iot-platform', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log('MongoDB connection error:', err));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/devices', deviceRoutes);
